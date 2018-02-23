@@ -250,7 +250,7 @@ public class QuizManager : MonoBehaviour {
           
         }
 
-        if(currentLevel >= 1)
+        if(currentLevel >= 3)
         {
             scoreUI.Show(allList, true);
         }
