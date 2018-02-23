@@ -21,7 +21,7 @@ public class QuizManager : MonoBehaviour {
     public List<QuizSlot> slotList3 = new List<QuizSlot>();
 
     public List<GameObject> currentLevelObjectList = new List<GameObject>();
-
+    public List<GameObject> currentLevelObjectOffList = new List<GameObject>();
 
     public int level1Score;
     public int level2Score;
@@ -81,11 +81,16 @@ public class QuizManager : MonoBehaviour {
         {
             currentLevelObjectList[i].SetActive(false);
         }
+
+        for(int i = 0; i < currentLevelObjectOffList.Count; i++)
+        {
+            currentLevelObjectOffList[i].SetActive(true);
+        }
         scoreUI.gameObject.SetActive(false);
         questionUI.gameObject.SetActive(false);
 
         currentLevelObjectList[0].SetActive(true);
-
+        currentLevelObjectOffList[0].SetActive(false);
         uiObject.SetActive(false);
         introObject.SetActive(true);
 
@@ -230,9 +235,15 @@ public class QuizManager : MonoBehaviour {
                     currentLevelObjectList[i].SetActive(false);
                 }
 
-                if(currentLevel < currentLevelObjectList.Count)
+                for (int i = 0; i < currentLevelObjectOffList.Count; i++)
+                {
+                    currentLevelObjectOffList[i].SetActive(true);
+                }
+
+                if (currentLevel < currentLevelObjectList.Count)
                 {
                     currentLevelObjectList[currentLevel].SetActive(true);
+                    currentLevelObjectOffList[currentLevel].SetActive(false);
                 }
                
             }
