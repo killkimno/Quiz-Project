@@ -65,28 +65,20 @@ public class QuizQuestion : MonoBehaviour {
             pageList[i].gameObject.SetActive(false);
         }
 
-        if(index == pageList.Count -1)
+   
+        //페이지 남음.
+        if (index < pageList.Count)
         {
-            //마지막 페이지.
+            pageList[index].SetActive(true);
+        }
+        else
+        {
             pageList[pageList.Count - 1].SetActive(true);
             nextButton.SetActive(false);
             teamButtonObject.SetActive(true);
         }
-        else
-        {
-            //페이지 남음.
-            if (index < pageList.Count)
-            {
-                pageList[index].SetActive(true);
-            }
-            else
-            {
-                pageList[pageList.Count - 1].SetActive(true);
-                nextButton.SetActive(false);
-                teamButtonObject.SetActive(true);
-            }
 
-        }
+        
 
 
 

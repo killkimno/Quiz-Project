@@ -8,8 +8,9 @@ public class QuizManager : MonoBehaviour {
 
     public GameObject introObject;
     public UILabel introLabel;
-
-    private bool isSkipIntro;
+    public GameObject introVideo;
+    
+   
 
     public GameObject uiObject;
     public ScoreUI scoreUI;
@@ -30,6 +31,13 @@ public class QuizManager : MonoBehaviour {
     public int currentLevel;
     private QuizSlot currentSlot = null;
     private List<QuizSlot> allList = new List<QuizSlot>();
+
+    public enum IntroStepType
+    {
+         Press, Video,
+    }
+
+    private IntroStepType stepType = IntroStepType.Press;
 
 
     public static QuizManager instance;
@@ -93,7 +101,7 @@ public class QuizManager : MonoBehaviour {
 
     IEnumerator ProcessShowIntro()
     {
-        while(!isSkipIntro)
+        while(stepType == IntroStepType.Press)
         {
             introLabel.gameObject.SetActive(true);
             yield return new WaitForSeconds(0.5f);
@@ -103,8 +111,8 @@ public class QuizManager : MonoBehaviour {
         }
       
 
-        uiObject.SetActive(true);
-        introObject.SetActive(false);
+
+        introVideo.SetActive(true);
 
         yield break;
     }
@@ -113,7 +121,17 @@ public class QuizManager : MonoBehaviour {
 
     public void ClickIntroNext()
     {
-        isSkipIntro = true;
+        if(stepType == IntroStepType.Press)
+        {
+            stepType = IntroStepType.Video;
+        }
+        else if(stepType == IntroStepType.Video)
+        {
+            introVideo.SetActive(false);
+
+            uiObject.SetActive(true);
+            introObject.SetActive(false);
+        }
 
     }
 
