@@ -45,7 +45,7 @@ public class QuizManager : MonoBehaviour {
     {
         if(Input.GetKeyDown(KeyCode.A))
         {
-            scoreUI.Show(allList);
+            scoreUI.Show(allList, false);
         }
     }
     private void Awake()
@@ -248,6 +248,11 @@ public class QuizManager : MonoBehaviour {
                
             }
           
+        }
+
+        if(currentLevel >= 1)
+        {
+            scoreUI.Show(allList, true);
         }
 
  

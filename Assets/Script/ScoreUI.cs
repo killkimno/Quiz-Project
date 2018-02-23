@@ -18,7 +18,7 @@ public class ScoreUI : MonoBehaviour {
     private List<List<int>> scoreList = new List<List<int>>();
 
     private List<List<UILabel>> totalLabelList = new List<List<UILabel>>();
-    public void Show(List<QuizSlot> slotList)
+    public void Show(List<QuizSlot> slotList, bool isResult)
     {
         totalLabelList.Clear();
 
