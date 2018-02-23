@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ScoreUI : MonoBehaviour {
 
+    public List<GameObject> winnerIconList = new List<GameObject>();
+
     public List<UILabel> scoreLabelList1 = new List<UILabel>();
     public List<UILabel> scoreLabelList2 = new List<UILabel>();
     public List<UILabel> scoreLabelList3 = new List<UILabel>();
@@ -69,7 +71,7 @@ public class ScoreUI : MonoBehaviour {
             {
                 if(totalLabelList[i].Count > j)
                 {
-                    totalLabelList[i][j].text = scoreList[i][j].ToString();
+                    totalLabelList[i][j].text = "+" + scoreList[i][j].ToString();
                 }
                 else
                 {
@@ -83,6 +85,33 @@ public class ScoreUI : MonoBehaviour {
         {
             resultScoreLabelList[i].text = totalScoreList[i].ToString();
         }
+
+        for (int i = 0; i < winnerIconList.Count; i++)
+        {
+            winnerIconList[i].SetActive(false);
+        }
+
+        if(isResult)
+        {
+            int highScoreIndex = -1;
+            int highScore = 0;
+
+            for(int i = 0; i < totalScoreList.Count; i++)
+            {
+                if(highScore < totalScoreList[i])
+                {
+                    highScoreIndex = i;
+                    highScore = totalScoreList[i];
+                }
+            }
+
+            if(highScoreIndex != -1)
+            {
+                winnerIconList[highScoreIndex].SetActive(true);
+            }
+        
+        }
+
     }
 
     public void ClickClose()
