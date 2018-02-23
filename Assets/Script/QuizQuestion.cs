@@ -9,11 +9,20 @@ public class QuizQuestion : MonoBehaviour {
 
     public List<GameObject> onList = new List<GameObject>();
 
-    public List<GameObject> quizObject = new List<GameObject>();
+    public List<QuestionObject> quizObject = new List<QuestionObject>();
     public GameObject quizParent;
 
+
+    public GameObject teamButtonObject;
+    public GameObject nextButton;
+
     private QuizSlot slot;
+    private int index;
+
+
     private Action<QuizSlot> callback;
+
+
     public void Show(QuizSlot slot, Action<QuizSlot> callback)
     {
         if(quizParent != null)
@@ -38,10 +47,55 @@ public class QuizQuestion : MonoBehaviour {
 
         for(int i = 0; i < quizObject.Count; i++)
         {
-            quizObject[i].SetActive(false);
+            quizObject[i].gameObject.SetActive(false);
         }
 
-        quizObject[slot.index].SetActive(true);
+        quizObject[slot.index].gameObject.SetActive(true);
+        teamButtonObject.SetActive(false);
+        index = 0;
+        ShowNext();
+    }
+
+    private void ShowNext()
+    {
+        nextButton.SetActive(true);
+        List<GameObject> pageList = quizObject[slot.index].pageList;
+        for (int i = 0; i < pageList.Count; i++)
+        {
+            pageList[i].gameObject.SetActive(false);
+        }
+
+        if(index == pageList.Count -1)
+        {
+            //마지막 페이지.
+            pageList[pageList.Count - 1].SetActive(true);
+            nextButton.SetActive(false);
+            teamButtonObject.SetActive(true);
+        }
+        else
+        {
+            //페이지 남음.
+            if (index < pageList.Count)
+            {
+                pageList[index].SetActive(true);
+            }
+            else
+            {
+                pageList[pageList.Count - 1].SetActive(true);
+                nextButton.SetActive(false);
+                teamButtonObject.SetActive(true);
+            }
+
+        }
+
+
+
+    }
+
+    public void ClickNext()
+    {
+        index++;
+        ShowNext();
     }
 
 

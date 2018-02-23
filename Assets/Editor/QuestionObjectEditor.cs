@@ -11,10 +11,21 @@ public class QuestionObjectEditor : Editor
     {
         DrawDefaultInspector();
 
-        QuestionObject aa = target as QuestionObject;
+        QuestionObject script = target as QuestionObject;
         if (GUILayout.Button("Build Object"))
         {
-          //  myScript.BuildObject();
+            script.pageList = new List<GameObject>();
+            Transform[] array = script.gameObject.GetComponentsInChildren<Transform>(true);
+
+            for(int i = 0; i < array.Length; i++)
+            {
+                if(array[i].name.Contains("Page"))
+                {
+                    script.pageList.Add(array[i].gameObject);
+                }
+                
+            }
+
         }
     }
 
