@@ -47,6 +47,18 @@ public class QuizManager : MonoBehaviour {
         {
             scoreUI.Show(allList, false);
         }
+        else if (Input.GetKeyDown(KeyCode.Z))
+        {
+            SoundMgr.PlaySound(SoundMgr.SoundType.sound_buttion_right);
+        }
+        else if (Input.GetKeyDown(KeyCode.X))
+        {
+            SoundMgr.PlaySound(SoundMgr.SoundType.sound_buttion_wrong);
+        }
+        else if (Input.GetKeyDown(KeyCode.C))
+        {
+            SoundMgr.PlaySound(SoundMgr.SoundType.answer_confirm);
+        }
     }
     private void Awake()
     {
