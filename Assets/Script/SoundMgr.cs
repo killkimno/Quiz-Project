@@ -6,12 +6,13 @@ public class SoundMgr : MonoBehaviour {
 
     public enum SoundType
     {
-        None, Button,
+        None, SlotOpen, SlotEnter,
     };
 
     public static SoundMgr instance;
 
     public AudioSource clickSound;
+    public AudioSource openSound;
 
     private void Awake()
     {
@@ -20,9 +21,13 @@ public class SoundMgr : MonoBehaviour {
 
     public static void PlaySound(SoundType soundType)
     {
-        if(soundType == SoundType.Button)
+        if(soundType == SoundType.SlotOpen)
         {
             instance.clickSound.Play();
+        }
+        else if(soundType == SoundType.SlotEnter)
+        {
+            instance.openSound.Play();
         }
     }
 

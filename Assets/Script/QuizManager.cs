@@ -6,7 +6,12 @@ using System.Collections;
 public class QuizManager : MonoBehaviour {
     public float alphaEffectValue = 0.01f;
 
+    public GameObject introObject;
+    public UILabel introLabel;
 
+    private bool isSkipIntro;
+
+    public GameObject uiObject;
     public ScoreUI scoreUI;
     public QuizQuestion questionUI;
 
@@ -72,7 +77,48 @@ public class QuizManager : MonoBehaviour {
         questionUI.gameObject.SetActive(false);
 
         currentLevelObjectList[0].SetActive(true);
+
+        uiObject.SetActive(false);
+        introObject.SetActive(true);
+
+        ShowIntro();
     }
+
+    #region :::::::::: 인트로 부분 :::::::::::
+
+    private void ShowIntro()
+    {
+        StartCoroutine(ProcessShowIntro());
+    }
+
+    IEnumerator ProcessShowIntro()
+    {
+        while(!isSkipIntro)
+        {
+            introLabel.gameObject.SetActive(true);
+            yield return new WaitForSeconds(0.5f);
+
+            introLabel.gameObject.SetActive(false);
+            yield return new WaitForSeconds(0.5f);
+        }
+      
+
+        uiObject.SetActive(true);
+        introObject.SetActive(false);
+
+        yield break;
+    }
+
+    #endregion
+
+    public void ClickIntroNext()
+    {
+        isSkipIntro = true;
+
+    }
+
+
+
 
     public void SlotCallback(QuizSlot slot)
     {

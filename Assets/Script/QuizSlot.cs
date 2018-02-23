@@ -107,7 +107,15 @@ public class QuizSlot : MonoBehaviour {
         {
             return;
         }
-        SoundMgr.PlaySound(SoundMgr.SoundType.Button);
+        if(stateType == StateType.Lock)
+        {
+            SoundMgr.PlaySound(SoundMgr.SoundType.SlotOpen);
+        }
+        else if(stateType == StateType.Ready)
+        {
+            SoundMgr.PlaySound(SoundMgr.SoundType.SlotEnter);
+        }
+        
         if (callback != null)
         {
             callback(this);
