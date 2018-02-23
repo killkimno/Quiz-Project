@@ -6,7 +6,7 @@ public class SoundMgr : MonoBehaviour {
 
     public enum SoundType
     {
-        None, SlotOpen, SlotEnter, Fortune, question_name, sound_buttion_right, sound_buttion_wrong, answer_confirm,
+        None, SlotOpen, SlotEnter, Fortune, question_name, sound_buttion_right, sound_buttion_wrong, answer_confirm, question_end,
     };
 
     public static SoundMgr instance;
@@ -18,6 +18,7 @@ public class SoundMgr : MonoBehaviour {
     public AudioSource sound_buttion_right;
     public AudioSource sound_buttion_wrong;
     public AudioSource answer_confirm;
+    public AudioSource question_end;
 
     private void Awake()
     {
@@ -53,6 +54,10 @@ public class SoundMgr : MonoBehaviour {
         else if (soundType == SoundType.answer_confirm)
         {
             instance.answer_confirm.Play();
+        }
+        else if(soundType == SoundType.question_end)
+        {
+            instance.question_end.Play();
         }
     }
 

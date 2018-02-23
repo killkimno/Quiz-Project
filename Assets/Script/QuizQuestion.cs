@@ -76,6 +76,8 @@ public class QuizQuestion : MonoBehaviour {
             pageList[pageList.Count - 1].SetActive(true);
             nextButton.SetActive(false);
             teamButtonObject.SetActive(true);
+
+            SoundMgr.PlaySound(SoundMgr.SoundType.question_end); ;
         }
 
         
